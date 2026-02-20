@@ -134,7 +134,8 @@ const SectionTitle = ({ children, className = '' }) => (
 )
 
 function StickyMobileCTA() {
-  const { t } = useLang()
+  const { t, lang } = useLang()
+  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lang === 'hr' ? 'Pozdrav, zanima me ReviewFlow za moj lokal.' : 'Hi, I\'m interested in ReviewFlow for my venue.')}`
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
@@ -154,9 +155,9 @@ function StickyMobileCTA() {
   return (
     <div className={`fixed bottom-0 left-0 right-0 z-40 md:hidden transition-transform duration-300 ${visible ? 'translate-y-0' : 'translate-y-full'}`}>
       <div className="bg-bg/95 backdrop-blur-xl border-t border-border px-5 py-3">
-        <a href="#kontakt" className="flex items-center justify-center gap-2 w-full py-3 bg-accent text-bg font-semibold rounded-lg text-sm">
+        <a href={waUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-3 bg-[#25D366] text-white font-semibold rounded-lg text-sm">
+          <Icon.WhatsApp className="w-4 h-4" />
           {t.mobileCta.text}
-          <Icon.ArrowRight className="w-4 h-4" />
         </a>
       </div>
     </div>
@@ -217,7 +218,8 @@ function Navbar() {
 }
 
 function Hero() {
-  const { t } = useLang()
+  const { t, lang } = useLang()
+  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lang === 'hr' ? 'Pozdrav, zanima me ReviewFlow za moj lokal.' : 'Hi, I\'m interested in ReviewFlow for my venue.')}`
   return (
     <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 px-5 md:px-8 overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-accent/[0.04] rounded-full blur-[120px] pointer-events-none" />
@@ -231,28 +233,23 @@ function Hero() {
         <p className="text-text-muted text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
           <BrandedText text={t.hero.desc} />
         </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-          <a href="#kontakt" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent text-bg font-semibold rounded-lg hover:bg-accent-hover transition-colors text-base">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
+          <a
+            href={waUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={t.hero.ctaPrimary}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366] text-white font-semibold rounded-lg hover:bg-[#20bd5a] transition-colors text-base shadow-lg shadow-[#25D366]/20"
+          >
+            <Icon.WhatsApp className="w-5 h-5" />
             {t.hero.ctaPrimary}
+          </a>
+          <a href="#kontakt" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 border border-border text-text-muted font-medium rounded-lg hover:border-border-hover hover:text-text transition-colors text-base">
+            {t.hero.ctaSecondary}
             <Icon.ArrowRight className="w-4 h-4" />
           </a>
-          <a href="#demo" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 border border-border text-text-muted font-medium rounded-lg hover:border-border-hover hover:text-text transition-colors text-base">
-            {t.hero.ctaSecondary}
-          </a>
         </div>
-        <a
-          href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t.whatsapp.heroBtn === 'Pošalji poruku na WhatsApp' ? 'Pozdrav, zanima me ReviewFlow za moj lokal.' : 'Hi, I\'m interested in ReviewFlow for my venue.')}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={t.whatsapp.heroBtn}
-          className="inline-flex flex-col items-center gap-1 mb-10"
-        >
-          <span className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-[#25D366]/30 bg-[#25D366]/10 text-[#25D366] font-semibold text-sm hover:bg-[#25D366]/20 hover:border-[#25D366]/50 hover:shadow-[0_0_20px_rgba(37,211,102,0.15)] transition-all focus:outline-none focus:ring-2 focus:ring-[#25D366]/40">
-            <Icon.WhatsApp className="w-5 h-5" />
-            {t.whatsapp.heroBtn}
-          </span>
-          <span className="text-xs text-text-dim">{t.whatsapp.heroSub}</span>
-        </a>
+        <p className="text-xs text-text-dim mb-8">{t.whatsapp.heroSub}</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-3 text-sm text-text-muted">
           {t.hero.badges.map((b, i) => (
             <span key={i} className="inline-flex items-center gap-2"><Icon.Check className="w-4 h-4 text-accent" />{b}</span>
@@ -289,6 +286,11 @@ function Problem() {
             </li>
           ))}
         </ul>
+        {t.problem.businessImpact && (
+          <div className="mt-10 p-5 md:p-6 rounded-xl border border-warning/20 bg-warning/5">
+            <p className="text-sm text-text leading-relaxed">{t.problem.businessImpact}</p>
+          </div>
+        )}
       </div>
     </Section>
   )
@@ -658,6 +660,37 @@ function Results() {
   )
 }
 
+function ROISection() {
+  const { t } = useLang()
+  return (
+    <Section id="roi" className="border-t border-border">
+      <div className="max-w-2xl mx-auto text-center">
+        <SectionLabel>{t.roi.label}</SectionLabel>
+        <SectionTitle className="mb-4">{t.roi.title}</SectionTitle>
+        <p className="text-text-muted text-lg mb-10">{t.roi.subtitle}</p>
+        <div className="p-6 md:p-8 rounded-2xl border border-border bg-bg-card">
+          <div className="space-y-3 mb-6">
+            <div className="flex items-center justify-between py-2 border-b border-border">
+              <span className="text-sm text-text-muted">{t.roi.line1}</span>
+              <span className="text-sm font-semibold text-text">3</span>
+            </div>
+            <div className="flex items-center justify-between py-2 border-b border-border">
+              <span className="text-sm text-text-muted">{t.roi.line2}</span>
+              <span className="text-sm font-semibold text-text">€18</span>
+            </div>
+            <div className="flex items-center justify-between py-2 border-b border-border">
+              <span className="text-sm text-text-muted">{t.roi.line3}</span>
+              <span className="text-sm font-semibold text-text">4</span>
+            </div>
+          </div>
+          <p className="text-2xl md:text-3xl font-display text-accent font-bold mb-3">{t.roi.result}</p>
+          <p className="text-sm text-text-muted">{t.roi.footer}</p>
+        </div>
+      </div>
+    </Section>
+  )
+}
+
 function Packages() {
   const { t } = useLang()
   const planMeta = [
@@ -721,7 +754,12 @@ function Packages() {
       </div>
       <div className="mt-12 max-w-2xl mx-auto p-6 rounded-2xl border border-success/20 bg-success/5 text-center">
         <p className="text-lg font-semibold text-text mb-2">{t.packages.riskTitle}</p>
-        <p className="text-sm text-text-muted leading-relaxed">{t.packages.riskText}</p>
+        <p className="text-sm text-text-muted leading-relaxed mb-4">{t.packages.riskText}</p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-2 text-xs text-text-dim">
+          <span>{t.packages.valueAnchor1}</span>
+          <span className="hidden sm:inline text-border">•</span>
+          <span>{t.packages.valueAnchor2}</span>
+        </div>
       </div>
     </Section>
   )
@@ -805,13 +843,13 @@ function WhatsAppCTA() {
         <SectionLabel>{t.whatsapp.ctaLabel}</SectionLabel>
         <h2 className="font-display text-2xl md:text-3xl lg:text-4xl leading-tight text-text mb-4">{t.whatsapp.ctaTitle}</h2>
         <p className="text-text-muted text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-8">{t.whatsapp.ctaText}</p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
           <a
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={t.whatsapp.ctaPrimary}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg border border-[#25D366]/30 bg-[#25D366]/10 text-[#25D366] font-semibold text-base hover:bg-[#25D366]/20 hover:border-[#25D366]/50 hover:shadow-[0_0_20px_rgba(37,211,102,0.15)] transition-all focus:outline-none focus:ring-2 focus:ring-[#25D366]/40"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366] text-white font-semibold rounded-lg hover:bg-[#20bd5a] transition-colors text-base shadow-lg shadow-[#25D366]/20"
           >
             <Icon.WhatsApp className="w-5 h-5" />
             {t.whatsapp.ctaPrimary}
@@ -824,6 +862,7 @@ function WhatsAppCTA() {
             <Icon.ArrowRight className="w-4 h-4" />
           </a>
         </div>
+        {t.whatsapp.ctaPersonal && <p className="text-xs text-text-dim">{t.whatsapp.ctaPersonal}</p>}
       </div>
     </section>
   )
@@ -1065,6 +1104,7 @@ export default function App() {
         <HowItWorks />
         <Demo />
         <Results />
+        <ROISection />
         <Packages />
         <Trust />
         <FAQ />
