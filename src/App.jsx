@@ -1052,24 +1052,46 @@ export default function App() {
     setMeta('meta[property="og:description"]', 'content', t.meta.ogDesc)
     setMeta('meta[name="twitter:title"]', 'content', t.meta.twitterTitle)
     setMeta('meta[name="twitter:description"]', 'content', t.meta.twitterDesc)
+    
+    let faqScript = document.getElementById('faq-schema')
+    if (!faqScript) {
+      faqScript = document.createElement('script')
+      faqScript.id = 'faq-schema'
+      faqScript.type = 'application/ld+json'
+      document.head.appendChild(faqScript)
+    }
+    faqScript.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": t.faq.items.map(item => ({
+        "@type": "Question",
+        "name": item.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": item.a
+        }
+      }))
+    })
   }, [lang, t])
 
   return (
     <LangContext.Provider value={{ t, lang, setLang }}>
       <div className={`min-h-screen bg-bg text-text font-body transition-opacity duration-700 ${loaded ? 'opacity-100' : 'opacity-0'}`}>
         <Navbar />
-        <Hero />
-        <Problem />
-        <Solution />
-        <Services />
-        <HowItWorks />
-        <Demo />
-        <Results />
-        <Packages />
-        <Trust />
-        <FAQ />
-        <WhatsAppCTA />
-        <Contact />
+        <main>
+          <Hero />
+          <Problem />
+          <Solution />
+          <Services />
+          <HowItWorks />
+          <Demo />
+          <Results />
+          <Packages />
+          <Trust />
+          <FAQ />
+          <WhatsAppCTA />
+          <Contact />
+        </main>
         <Footer />
         <StickyMobileCTA />
         <FloatingWhatsApp />
