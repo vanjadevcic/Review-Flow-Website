@@ -884,7 +884,7 @@ function Contact() {
               </div>
               <div>
                 <p className="text-xs text-text-dim">{t.contact.emailLabel}</p>
-                <a href="mailto:kirkkodre@gmail.com" className="text-sm text-text hover:text-accent transition-colors">kirkkodre@gmail.com</a>
+                <a href="mailto:vanja.devcic@gmail.com" className="text-sm text-text hover:text-accent transition-colors">vanja.devcic@gmail.com</a>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -893,7 +893,7 @@ function Contact() {
               </div>
               <div>
                 <p className="text-xs text-text-dim">{t.contact.phoneLabel}</p>
-                <a href="tel:0480356090" className="text-sm text-text hover:text-accent transition-colors">0480 356 090</a>
+                <a href="tel:+385915959108" className="text-sm text-text hover:text-accent transition-colors">+385 91 595 9108</a>
               </div>
             </div>
           </div>
@@ -1019,9 +1019,9 @@ function Footer() {
         <div className="mt-8 pt-8 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-text-dim">© {currentYear} Review<span className="text-accent">Flow</span>. {t.footer.copyright}</p>
           <div className="flex items-center gap-4 text-xs text-text-dim">
-            <a href="mailto:kirkkodre@gmail.com" className="hover:text-text transition-colors">kirkkodre@gmail.com</a>
+            <a href="mailto:vanja.devcic@gmail.com" className="hover:text-text transition-colors">vanja.devcic@gmail.com</a>
             <span className="text-border">•</span>
-            <a href="tel:0480356090" className="hover:text-text transition-colors">0480 356 090</a>
+            <a href="tel:+385915959108" className="hover:text-text transition-colors">+385 91 595 9108</a>
           </div>
         </div>
       </div>
