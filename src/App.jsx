@@ -879,13 +879,20 @@ function FloatingWhatsApp() {
 function Contact() {
   const { t } = useLang()
   const [formData, setFormData] = useState({
-    name: '', businessName: '', city: '', phone: '', email: '', type: 'restaurant', message: ''
+    name: '', businessName: '', city: '', phone: '', email: '', type: 'restaurant', message: '', _honeypot: ''
   })
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    
+    // Honeypot check - if filled, it's a bot
+    if (formData._honeypot) {
+      setSubmitted(true)
+      return
+    }
+    
     setSubmitting(true)
     try {
       const response = await fetch('/api/contact', {
@@ -1015,6 +1022,17 @@ function Contact() {
                   placeholder={t.contact.formMessagePlaceholder}
                 />
               </div>
+              {/* Honeypot field - hidden from real users, bots will fill it */}
+              <input
+                type="text"
+                name="_honeypot"
+                value={formData._honeypot}
+                onChange={e => setFormData({ ...formData, _honeypot: e.target.value })}
+                tabIndex="-1"
+                autoComplete="off"
+                style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px' }}
+                aria-hidden="true"
+              />
               <button
                 type="submit"
                 className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-accent text-bg font-semibold rounded-xl hover:brightness-110 transition-all text-base cursor-pointer shadow-lg shadow-accent/20 hover:shadow-accent/30"
