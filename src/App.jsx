@@ -134,8 +134,7 @@ const SectionTitle = ({ children, className = '' }) => (
 )
 
 function StickyMobileCTA() {
-  const { t, lang } = useLang()
-  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lang === 'hr' ? 'Pozdrav, zanima me ReviewFlow za moj lokal.' : 'Hi, I\'m interested in ReviewFlow for my venue.')}`
+  const { t } = useLang()
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
@@ -155,9 +154,9 @@ function StickyMobileCTA() {
   return (
     <div className={`fixed bottom-0 left-0 right-0 z-40 md:hidden transition-transform duration-300 ${visible ? 'translate-y-0' : 'translate-y-full'}`}>
       <div className="bg-bg/95 backdrop-blur-xl border-t border-border px-5 py-3">
-        <a href={waUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full py-3 bg-[#25D366] text-white font-semibold rounded-lg text-sm">
-          <Icon.WhatsApp className="w-4 h-4" />
-          {t.mobileCta.text}
+        <a href="#kontakt" className="flex items-center justify-center gap-2 w-full py-3 bg-accent text-bg font-semibold rounded-lg text-sm">
+          <Icon.ArrowRight className="w-4 h-4" />
+          {t.nav.cta}
         </a>
       </div>
     </div>
@@ -342,16 +341,6 @@ function Solution() {
             </div>
           </div>
         </div>
-      </div>
-      <p className="text-center text-sm text-text-dim uppercase tracking-wider mb-8 font-medium">{t.solution.cardsHeader}</p>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {t.solution.cards.map((c, i) => (
-          <div key={i} className="group p-6 rounded-xl border border-border bg-bg-card hover:border-border-hover transition-colors relative">
-            <div className="w-10 h-10 rounded-lg bg-accent-muted flex items-center justify-center text-accent mb-4">{cardIcons[i]}</div>
-            <h3 className="font-semibold text-text mb-2">{c.title}</h3>
-            <p className="text-sm text-text-muted leading-relaxed">{c.desc}</p>
-          </div>
-        ))}
       </div>
     </Section>
   )
@@ -655,37 +644,6 @@ function Results() {
         <p className="text-sm text-accent font-medium uppercase tracking-wider mb-3">{t.results.calcLabel}</p>
         <ROICounter />
         <p className="text-sm text-text-muted">{t.results.calcFooter}</p>
-      </div>
-    </Section>
-  )
-}
-
-function ROISection() {
-  const { t } = useLang()
-  return (
-    <Section id="roi" className="border-t border-border">
-      <div className="max-w-2xl mx-auto text-center">
-        <SectionLabel>{t.roi.label}</SectionLabel>
-        <SectionTitle className="mb-4">{t.roi.title}</SectionTitle>
-        <p className="text-text-muted text-lg mb-10">{t.roi.subtitle}</p>
-        <div className="p-6 md:p-8 rounded-2xl border border-border bg-bg-card">
-          <div className="space-y-3 mb-6">
-            <div className="flex items-center justify-between py-2 border-b border-border">
-              <span className="text-sm text-text-muted">{t.roi.line1}</span>
-              <span className="text-sm font-semibold text-text">3</span>
-            </div>
-            <div className="flex items-center justify-between py-2 border-b border-border">
-              <span className="text-sm text-text-muted">{t.roi.line2}</span>
-              <span className="text-sm font-semibold text-text">€18</span>
-            </div>
-            <div className="flex items-center justify-between py-2 border-b border-border">
-              <span className="text-sm text-text-muted">{t.roi.line3}</span>
-              <span className="text-sm font-semibold text-text">4</span>
-            </div>
-          </div>
-          <p className="text-2xl md:text-3xl font-display text-accent font-bold mb-3">{t.roi.result}</p>
-          <p className="text-sm text-text-muted">{t.roi.footer}</p>
-        </div>
       </div>
     </Section>
   )
@@ -1104,7 +1062,6 @@ export default function App() {
         <HowItWorks />
         <Demo />
         <Results />
-        <ROISection />
         <Packages />
         <Trust />
         <FAQ />
