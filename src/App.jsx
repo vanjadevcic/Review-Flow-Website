@@ -118,8 +118,8 @@ const Stars = ({ count = 5, size = 'w-4 h-4' }) => (
 function BrandedText({ text }) {
   if (!text || !text.includes('RatingFlow')) return text
   return text.split(/(RatingFlow™?)/g).map((part, i) => {
-    if (part === 'RatingFlow') return <Fragment key={i}>Review<span className="text-accent">Flow</span></Fragment>
-    if (part === 'RatingFlow™') return <Fragment key={i}>Review<span className="text-accent">Flow</span>™</Fragment>
+    if (part === 'RatingFlow') return <Fragment key={i}>Rating<span className="text-accent">Flow</span></Fragment>
+    if (part === 'RatingFlow™') return <Fragment key={i}>Rating<span className="text-accent">Flow</span>™</Fragment>
     return <Fragment key={i}>{part}</Fragment>
   })
 }
@@ -186,7 +186,7 @@ function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-bg/80 backdrop-blur-xl border-b border-border">
       <div className="mx-auto max-w-6xl flex items-center justify-between px-5 md:px-8 h-16">
-        <a href="#" className="font-display text-2xl text-text tracking-tight font-extrabold">Review<span className="text-accent">Flow</span></a>
+        <a href="#" className="font-display text-2xl text-text tracking-tight font-extrabold">Rating<span className="text-accent">Flow</span></a>
         <div className="hidden lg:flex items-center gap-6">
           {t.nav.links.map(l => (
             <a key={l.href} href={l.href} className="text-sm text-text-muted hover:text-text transition-colors whitespace-nowrap">{l.label}</a>
@@ -888,13 +888,15 @@ function Contact() {
     e.preventDefault()
     setSubmitting(true)
     try {
-      await fetch('https://formspree.io/f/xpwzgkjl', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       })
+      if (!response.ok) throw new Error('Failed to send')
     } catch (err) {
-      // silently continue
+      console.error('Form submission error:', err)
+      // silently continue - still show success to user
     }
     setSubmitting(false)
     setSubmitted(true)
@@ -1037,7 +1039,7 @@ function Footer() {
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
-            <p className="font-display text-2xl text-text tracking-tight font-extrabold mb-1">Review<span className="text-accent">Flow</span></p>
+            <p className="font-display text-2xl text-text tracking-tight font-extrabold mb-1">Rating<span className="text-accent">Flow</span></p>
             <p className="text-sm text-text-muted">{t.footer.tagline}</p>
           </div>
           <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-text-muted">
@@ -1047,7 +1049,7 @@ function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-text-dim">© {currentYear} Review<span className="text-accent">Flow</span>. {t.footer.copyright}</p>
+          <p className="text-xs text-text-dim">© {currentYear} Rating<span className="text-accent">Flow</span>. {t.footer.copyright}</p>
           <div className="flex items-center gap-4 text-xs text-text-dim">
             <a href="mailto:vanja.devcic@gmail.com" className="hover:text-text transition-colors">vanja.devcic@gmail.com</a>
             <span className="text-border">•</span>
