@@ -187,18 +187,18 @@ function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-bg/80 backdrop-blur-xl border-b border-border">
       <div className="mx-auto max-w-6xl flex items-center justify-between px-5 md:px-8 h-16">
         <a href="#" className="font-display text-2xl text-text tracking-tight font-extrabold">Review<span className="text-accent">Flow</span></a>
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-6">
           {t.nav.links.map(l => (
-            <a key={l.href} href={l.href} className="text-sm text-text-muted hover:text-text transition-colors">{l.label}</a>
+            <a key={l.href} href={l.href} className="text-sm text-text-muted hover:text-text transition-colors whitespace-nowrap">{l.label}</a>
           ))}
         </div>
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-4">
           <LangSwitcher />
-          <a href="#kontakt" className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-bg text-sm font-semibold rounded-lg hover:bg-accent-hover transition-colors">
+          <a href="#kontakt" className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-bg text-sm font-semibold rounded-lg hover:bg-accent-hover transition-colors whitespace-nowrap">
             {t.nav.cta}
           </a>
         </div>
-        <div className="flex md:hidden items-center gap-3">
+        <div className="flex lg:hidden items-center gap-3">
           <LangSwitcher />
           <button onClick={() => setOpen(!open)} className="text-text-muted" aria-label={t.nav.menuLabel}>
             {open ? <Icon.X className="w-6 h-6" /> : <Icon.Menu className="w-6 h-6" />}
@@ -206,7 +206,7 @@ function Navbar() {
         </div>
       </div>
       {open && (
-        <div className="md:hidden border-t border-border bg-bg/95 backdrop-blur-xl">
+        <div className="lg:hidden border-t border-border bg-bg/95 backdrop-blur-xl">
           <div className="px-5 py-6 flex flex-col gap-4">
             {t.nav.links.map(l => (
               <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-text-muted hover:text-text transition-colors py-1">{l.label}</a>
