@@ -126,11 +126,11 @@ const Section = ({ id, children, className = '' }) => (
 )
 
 const SectionLabel = ({ children }) => (
-  <p className="text-accent text-sm font-medium tracking-widest uppercase mb-4">{children}</p>
+  <p className="text-accent text-sm font-semibold tracking-[0.2em] uppercase mb-4">{children}</p>
 )
 
 const SectionTitle = ({ children, className = '' }) => (
-  <h2 className={`font-display text-3xl md:text-4xl lg:text-5xl leading-tight text-text ${className}`}>{children}</h2>
+  <h2 className={`font-display text-3xl md:text-4xl lg:text-5xl leading-tight text-text font-bold ${className}`}>{children}</h2>
 )
 
 function StickyMobileCTA() {
@@ -224,7 +224,7 @@ function Hero() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-accent/[0.04] rounded-full blur-[120px] pointer-events-none" />
       <div className="relative mx-auto max-w-4xl text-center">
         <SectionLabel>{t.hero.label}</SectionLabel>
-        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] mb-6">
+        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] mb-6 font-extrabold">
           {t.hero.titleLine1Start}<span className="text-accent">★</span>{t.hero.titleLine1End}<br />
           {t.hero.titleLine2}<br />
           {t.hero.titleLine3}
@@ -238,12 +238,12 @@ function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={t.hero.ctaPrimary}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366] text-white font-semibold rounded-lg hover:bg-[#20bd5a] transition-colors text-base shadow-lg shadow-[#25D366]/20"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366] text-white font-semibold rounded-lg hover:bg-[#20bd5a] transition-all text-base shadow-lg shadow-[#25D366]/20 hover:shadow-[#25D366]/40 hover:scale-[1.02]"
           >
             <Icon.WhatsApp className="w-5 h-5" />
             {t.hero.ctaPrimary}
           </a>
-          <a href="#kontakt" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 border border-border text-text-muted font-medium rounded-lg hover:border-border-hover hover:text-text transition-colors text-base">
+          <a href="#kontakt" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 border border-border text-text-muted font-medium rounded-lg hover:border-border-hover hover:text-text transition-all text-base hover:bg-bg-elevated/50">
             {t.hero.ctaSecondary}
             <Icon.ArrowRight className="w-4 h-4" />
           </a>
@@ -272,21 +272,21 @@ function Hero() {
 function Problem() {
   const { t } = useLang()
   return (
-    <Section id="problem" className="border-t border-border">
+    <Section id="problem" className="border-t border-border/50">
       <div className="max-w-3xl mx-auto text-center">
         <SectionLabel>{t.problem.label}</SectionLabel>
         <SectionTitle>{t.problem.title}</SectionTitle>
         <p className="text-text-muted mt-4 mb-10 text-lg leading-relaxed">{t.problem.subtitle}</p>
-        <ul className="space-y-5 text-left">
+        <ul className="space-y-4 text-left">
           {t.problem.painPoints.map((p, i) => (
             <li key={i} className="flex items-start gap-4 text-text-muted">
-              <span className="mt-1 flex-shrink-0 w-6 h-6 rounded-full border border-danger/30 bg-danger/10 flex items-center justify-center text-danger text-xs font-bold">{i + 1}</span>
+              <span className="mt-1 flex-shrink-0 w-7 h-7 rounded-full border border-danger/30 bg-danger/10 flex items-center justify-center text-danger text-xs font-bold">{i + 1}</span>
               <span className="text-base leading-relaxed">{p}</span>
             </li>
           ))}
         </ul>
         {t.problem.businessImpact && (
-          <div className="mt-10 p-5 md:p-6 rounded-xl border border-warning/20 bg-warning/5">
+          <div className="mt-10 p-5 md:p-6 rounded-2xl border border-warning/20 bg-warning/5 backdrop-blur-sm">
             <p className="text-sm text-text leading-relaxed">{t.problem.businessImpact}</p>
           </div>
         )}
@@ -305,16 +305,16 @@ function Solution() {
   ]
 
   return (
-    <Section id="rjesenje" className="border-t border-border">
+    <Section id="rjesenje" className="border-t border-border/50">
       <div className="text-center mb-14">
         <SectionLabel>{t.solution.label}</SectionLabel>
         <SectionTitle className="max-w-3xl mx-auto"><BrandedText text={t.solution.title} /></SectionTitle>
         <p className="text-text-muted mt-4 max-w-2xl mx-auto text-lg leading-relaxed">{t.solution.subtitle}</p>
       </div>
-      <div className="mb-16 p-6 md:p-8 rounded-2xl border border-border bg-bg-card">
-        <p className="text-sm text-text-dim uppercase tracking-wider mb-6 font-medium">{t.solution.processHeader}</p>
+      <div className="mb-16 p-6 md:p-8 rounded-2xl border border-border bg-bg-card/80 backdrop-blur-sm">
+        <p className="text-sm text-text-dim uppercase tracking-[0.15em] mb-6 font-medium">{t.solution.processHeader}</p>
         <div className="flex flex-col md:flex-row items-stretch gap-4">
-          <div className="flex-1 p-5 rounded-xl bg-bg-elevated border border-border text-center">
+          <div className="flex-1 p-5 rounded-xl bg-bg-elevated/50 border border-border text-center hover:border-accent/30 transition-colors">
             <Icon.QrCode className="w-8 h-8 text-accent mx-auto mb-3" />
             <p className="text-sm font-semibold text-text mb-1">{t.solution.qrTitle}</p>
             <p className="text-xs text-text-muted">{t.solution.qrDesc}</p>
@@ -322,7 +322,7 @@ function Solution() {
           <div className="flex items-center justify-center text-text-dim">
             <Icon.ArrowRight className="w-5 h-5 rotate-90 md:rotate-0" />
           </div>
-          <div className="flex-1 p-5 rounded-xl bg-bg-elevated border border-border text-center">
+          <div className="flex-1 p-5 rounded-xl bg-bg-elevated/50 border border-border text-center hover:border-accent/30 transition-colors">
             <Stars count={5} size="w-4 h-4" />
             <p className="text-sm font-semibold text-text mt-2 mb-1">{t.solution.rateTitle}</p>
             <p className="text-xs text-text-muted">{t.solution.rateDesc}</p>
@@ -331,11 +331,11 @@ function Solution() {
             <Icon.ArrowRight className="w-5 h-5 rotate-90 md:rotate-0" />
           </div>
           <div className="flex-1 grid grid-rows-2 gap-3">
-            <div className="p-4 rounded-xl bg-success/10 border border-success/20 text-center">
+            <div className="p-4 rounded-xl bg-success/10 border border-success/20 text-center hover:bg-success/15 transition-colors">
               <p className="text-xs font-semibold text-success">4–5 ★</p>
               <p className="text-xs text-text-muted mt-1">{t.solution.highRating}</p>
             </div>
-            <div className="p-4 rounded-xl bg-warning/10 border border-warning/20 text-center">
+            <div className="p-4 rounded-xl bg-warning/10 border border-warning/20 text-center hover:bg-warning/15 transition-colors">
               <p className="text-xs font-semibold text-warning">1–3 ★</p>
               <p className="text-xs text-text-muted mt-1">{t.solution.lowRating}</p>
             </div>
@@ -357,29 +357,29 @@ function Services() {
   ]
 
   return (
-    <Section id="usluge" className="border-t border-border">
+    <Section id="usluge" className="border-t border-border/50">
       <div className="text-center mb-14">
         <SectionLabel>{t.services.label}</SectionLabel>
         <SectionTitle className="max-w-3xl mx-auto">{t.services.title}</SectionTitle>
       </div>
       <div className="grid md:grid-cols-2 gap-6">
         {t.services.items.map((s, i) => (
-          <div key={i} className="p-6 md:p-8 rounded-xl border border-border bg-bg-card hover:border-border-hover transition-colors">
+          <div key={i} className="p-6 md:p-8 rounded-2xl border border-border bg-bg-card/80 backdrop-blur-sm hover:border-border-hover hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-accent-muted flex items-center justify-center text-accent flex-shrink-0">{serviceIcons[i]}</div>
+              <div className="w-11 h-11 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent flex-shrink-0">{serviceIcons[i]}</div>
               <h3 className="font-semibold text-text text-lg">{s.title}</h3>
             </div>
-            <div className="space-y-3 pl-14">
+            <div className="space-y-3 pl-[60px]">
               <div>
-                <p className="text-xs text-text-dim uppercase tracking-wider mb-1 font-medium">{t.services.whatLabel}</p>
+                <p className="text-xs text-text-dim uppercase tracking-[0.15em] mb-1 font-medium">{t.services.whatLabel}</p>
                 <p className="text-sm text-text-muted leading-relaxed">{s.what}</p>
               </div>
               <div>
-                <p className="text-xs text-text-dim uppercase tracking-wider mb-1 font-medium">{t.services.whyLabel}</p>
+                <p className="text-xs text-text-dim uppercase tracking-[0.15em] mb-1 font-medium">{t.services.whyLabel}</p>
                 <p className="text-sm text-text-muted leading-relaxed">{s.why}</p>
               </div>
               <div className="pt-2">
-                <span className="inline-block text-xs font-medium text-accent bg-accent-muted px-3 py-1 rounded-full">{s.metric}</span>
+                <span className="inline-block text-xs font-semibold text-accent bg-accent/10 border border-accent/20 px-3 py-1.5 rounded-full">{s.metric}</span>
               </div>
             </div>
           </div>
@@ -395,15 +395,15 @@ function HowItWorks() {
   const nums = ['01', '02', '03']
 
   return (
-    <Section id="kako-radi" className="border-t border-border">
+    <Section id="kako-radi" className="border-t border-border/50">
       <div className="text-center mb-14">
         <SectionLabel>{t.howItWorks.label}</SectionLabel>
         <SectionTitle className="max-w-3xl mx-auto">{t.howItWorks.title}</SectionTitle>
       </div>
       <div className="grid md:grid-cols-3 gap-6 mb-12">
         {t.howItWorks.steps.map((s, i) => (
-          <div key={i} className="relative p-6 md:p-8 rounded-xl border border-border bg-bg-card">
-            <span className="text-5xl font-display text-accent/20 absolute top-4 right-6">{nums[i]}</span>
+          <div key={i} className="relative p-6 md:p-8 rounded-2xl border border-border bg-bg-card/80 backdrop-blur-sm hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 overflow-hidden">
+            <span className="text-6xl font-display text-accent/10 absolute top-2 right-4 font-extrabold">{nums[i]}</span>
             <div className="relative">
               <h3 className="font-semibold text-text text-lg mb-3">{s.title}</h3>
               <p className="text-sm text-text-muted leading-relaxed">{s.desc}</p>
@@ -412,14 +412,14 @@ function HowItWorks() {
         ))}
       </div>
       <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-        <div className="flex items-center gap-3 px-6 py-4 rounded-xl border border-border bg-bg-card">
+        <div className="flex items-center gap-3 px-6 py-4 rounded-2xl border border-border bg-bg-card/80 backdrop-blur-sm">
           <Icon.Clock className="w-5 h-5 text-accent" />
           <div>
             <p className="text-sm font-semibold text-text">{t.howItWorks.setupTitle}</p>
             <p className="text-xs text-text-muted">{t.howItWorks.setupDesc}</p>
           </div>
         </div>
-        <div className="flex items-center gap-3 px-6 py-4 rounded-xl border border-accent/20 bg-accent-muted">
+        <div className="flex items-center gap-3 px-6 py-4 rounded-2xl border border-accent/20 bg-accent/5 backdrop-blur-sm">
           <Icon.Check className="w-5 h-5 text-accent" />
           <div>
             <p className="text-sm font-semibold text-text">{t.howItWorks.runsTitle}</p>
@@ -434,16 +434,16 @@ function HowItWorks() {
 function Demo() {
   const { t } = useLang()
   return (
-    <Section id="demo" className="border-t border-border">
+    <Section id="demo" className="border-t border-border/50">
       <div className="text-center mb-14">
         <SectionLabel>{t.demo.label}</SectionLabel>
         <SectionTitle className="max-w-3xl mx-auto">{t.demo.title}</SectionTitle>
       </div>
       <div className="mb-12 max-w-3xl mx-auto">
-        <div className="relative aspect-video rounded-2xl border border-border bg-bg-card overflow-hidden group cursor-pointer">
+        <div className="relative aspect-video rounded-2xl border border-border bg-bg-card overflow-hidden group cursor-pointer hover:border-accent/30 transition-all">
           <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <div className="w-16 h-16 rounded-full bg-accent/20 border border-accent/30 flex items-center justify-center mb-4 group-hover:bg-accent/30 transition-colors">
+            <div className="w-16 h-16 rounded-full bg-accent/20 border border-accent/30 flex items-center justify-center mb-4 group-hover:bg-accent/30 group-hover:scale-110 transition-all duration-300 shadow-lg shadow-accent/10">
               <Icon.Play className="w-7 h-7 text-accent ml-1" />
             </div>
             <p className="text-sm text-text-muted font-medium">{t.demo.videoText}</p>
@@ -451,9 +451,9 @@ function Demo() {
         </div>
       </div>
       <div className="grid lg:grid-cols-3 gap-6">
-        <div className="rounded-2xl border border-border bg-bg-card overflow-hidden">
-          <div className="px-6 py-4 border-b border-border bg-bg-elevated">
-            <p className="text-xs text-text-dim uppercase tracking-wider font-medium">{t.demo.guestFlowHeader}</p>
+        <div className="rounded-2xl border border-border bg-bg-card/80 backdrop-blur-sm overflow-hidden">
+          <div className="px-6 py-4 border-b border-border bg-bg-elevated/50">
+            <p className="text-xs text-text-dim uppercase tracking-[0.15em] font-medium">{t.demo.guestFlowHeader}</p>
           </div>
           <div className="p-6 space-y-4">
             <div className="flex items-center gap-3 p-4 rounded-xl bg-bg-elevated border border-border">
@@ -487,9 +487,9 @@ function Demo() {
             </div>
           </div>
         </div>
-        <div className="rounded-2xl border border-border bg-bg-card overflow-hidden">
-          <div className="px-6 py-4 border-b border-border bg-bg-elevated">
-            <p className="text-xs text-text-dim uppercase tracking-wider font-medium">{t.demo.ownerFlowHeader}</p>
+        <div className="rounded-2xl border border-border bg-bg-card/80 backdrop-blur-sm overflow-hidden">
+          <div className="px-6 py-4 border-b border-border bg-bg-elevated/50">
+            <p className="text-xs text-text-dim uppercase tracking-[0.15em] font-medium">{t.demo.ownerFlowHeader}</p>
           </div>
           <div className="p-6 space-y-4">
             <div className="rounded-xl bg-[#0b3d2e] border border-[#1a5c3a] p-4">
@@ -526,9 +526,9 @@ function Demo() {
             </div>
           </div>
         </div>
-        <div className="rounded-2xl border border-border bg-bg-card overflow-hidden">
-          <div className="px-6 py-4 border-b border-border bg-bg-elevated">
-            <p className="text-xs text-text-dim uppercase tracking-wider font-medium">{t.demo.reportHeader}</p>
+        <div className="rounded-2xl border border-border bg-bg-card/80 backdrop-blur-sm overflow-hidden">
+          <div className="px-6 py-4 border-b border-border bg-bg-elevated/50">
+            <p className="text-xs text-text-dim uppercase tracking-[0.15em] font-medium">{t.demo.reportHeader}</p>
           </div>
           <div className="p-6 space-y-4">
             <div className="flex items-center justify-between mb-2">
@@ -550,7 +550,7 @@ function Demo() {
               </div>
             </div>
             <div>
-              <p className="text-xs text-success uppercase tracking-wider mb-2 font-medium">{t.demo.reportPraiseHeader}</p>
+              <p className="text-xs text-success uppercase tracking-[0.15em] mb-2 font-medium">{t.demo.reportPraiseHeader}</p>
               <ul className="space-y-1.5">
                 {t.demo.reportPraises.map((p, i) => (
                   <li key={i} className="text-xs text-text-muted flex items-start gap-2"><span className="text-success mt-0.5">+</span> {p}</li>
@@ -558,7 +558,7 @@ function Demo() {
               </ul>
             </div>
             <div>
-              <p className="text-xs text-warning uppercase tracking-wider mb-2 font-medium">{t.demo.reportComplaintHeader}</p>
+              <p className="text-xs text-warning uppercase tracking-[0.15em] mb-2 font-medium">{t.demo.reportComplaintHeader}</p>
               <ul className="space-y-1.5">
                 {t.demo.reportComplaintsList.map((c, i) => (
                   <li key={i} className="text-xs text-text-muted flex items-start gap-2"><span className="text-warning mt-0.5">–</span> {c}</li>
@@ -566,7 +566,7 @@ function Demo() {
               </ul>
             </div>
             <div>
-              <p className="text-xs text-accent uppercase tracking-wider mb-2 font-medium">{t.demo.reportActionsHeader}</p>
+              <p className="text-xs text-accent uppercase tracking-[0.15em] mb-2 font-medium">{t.demo.reportActionsHeader}</p>
               <ul className="space-y-1.5">
                 {t.demo.reportActions.map((a, i) => (
                   <li key={i} className="text-xs text-text-muted">• {a}</li>
@@ -611,7 +611,7 @@ function ROICounter() {
   }, [])
 
   return (
-    <p ref={ref} className="text-2xl md:text-3xl font-display text-text mb-3">
+    <p ref={ref} className="text-2xl md:text-3xl font-display text-text mb-3 font-bold">
       {vals.tables}{t.results.roiPrefix}{vals.avg}{t.results.roiMiddle}<span className="text-accent">€{vals.total}{t.results.roiSuffix}</span>
     </p>
   )
@@ -620,14 +620,14 @@ function ROICounter() {
 function Results() {
   const { t } = useLang()
   return (
-    <Section id="rezultati" className="border-t border-border">
+    <Section id="rezultati" className="border-t border-border/50">
       <div className="text-center mb-14">
         <SectionLabel>{t.results.label}</SectionLabel>
         <SectionTitle className="max-w-3xl mx-auto"><BrandedText text={t.results.title} /></SectionTitle>
       </div>
       <div className="grid md:grid-cols-3 gap-6 mb-12">
         {t.results.groups.map((g, i) => (
-          <div key={i} className="p-6 rounded-xl border border-border bg-bg-card">
+          <div key={i} className="p-6 rounded-2xl border border-border bg-bg-card/80 backdrop-blur-sm hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
             <p className="text-sm font-semibold text-accent mb-4">{g.label}</p>
             <ul className="space-y-3">
               {g.items.map((item, j) => (
@@ -640,8 +640,8 @@ function Results() {
           </div>
         ))}
       </div>
-      <div className="max-w-2xl mx-auto p-6 md:p-8 rounded-2xl border border-accent/20 bg-accent-muted text-center">
-        <p className="text-sm text-accent font-medium uppercase tracking-wider mb-3">{t.results.calcLabel}</p>
+      <div className="max-w-2xl mx-auto p-6 md:p-8 rounded-2xl border border-accent/20 bg-accent/5 backdrop-blur-sm text-center shadow-lg shadow-accent/5">
+        <p className="text-sm text-accent font-semibold uppercase tracking-[0.15em] mb-3">{t.results.calcLabel}</p>
         <ROICounter />
         <p className="text-sm text-text-muted">{t.results.calcFooter}</p>
       </div>
@@ -658,7 +658,7 @@ function Packages() {
   ]
 
   return (
-    <Section id="cijene" className="border-t border-border">
+    <Section id="cijene" className="border-t border-border/50">
       <div className="text-center mb-14">
         <SectionLabel>{t.packages.label}</SectionLabel>
         <SectionTitle className="max-w-3xl mx-auto">{t.packages.title}</SectionTitle>
@@ -668,7 +668,7 @@ function Packages() {
         {t.packages.plans.map((p, i) => {
           const m = planMeta[i]
           return (
-            <div key={i} className={`relative flex flex-col p-6 md:p-8 rounded-2xl border transition-all ${m.highlight ? 'border-accent bg-accent-muted md:scale-105 shadow-lg shadow-accent/10 z-10' : 'border-border bg-bg-card'}`}>
+            <div key={i} className={`relative flex flex-col p-6 md:p-8 rounded-2xl border transition-all ${m.highlight ? 'border-accent/40 bg-accent/5 shadow-2xl shadow-accent/10' : 'border-border bg-bg-card/80 backdrop-blur-sm hover:border-border-hover'}`}>
               {m.highlight && (
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-bold uppercase tracking-widest bg-accent text-bg px-4 py-1 rounded-full">{t.packages.badge}</span>
               )}
@@ -691,10 +691,10 @@ function Packages() {
               </ul>
               <a
                 href="#kontakt"
-                className={`inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-colors ${
+                className={`inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm transition-all ${
                   m.highlight
-                    ? 'bg-accent text-bg hover:bg-accent-hover'
-                    : 'border border-border text-text hover:border-border-hover'
+                    ? 'bg-accent text-bg hover:brightness-110 shadow-lg shadow-accent/20'
+                    : 'border border-border text-text hover:border-border-hover hover:bg-bg-elevated/50'
                 }`}
               >
                 {m.isCustom ? t.packages.ctaContact : t.packages.ctaStart}
@@ -710,7 +710,7 @@ function Packages() {
           {t.packages.trial}
         </span>
       </div>
-      <div className="mt-12 max-w-2xl mx-auto p-6 rounded-2xl border border-success/20 bg-success/5 text-center">
+      <div className="mt-12 max-w-2xl mx-auto p-6 rounded-2xl border border-success/20 bg-success/5 backdrop-blur-sm text-center">
         <p className="text-lg font-semibold text-text mb-2">{t.packages.riskTitle}</p>
         <p className="text-sm text-text-muted leading-relaxed mb-4">{t.packages.riskText}</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-2 text-xs text-text-dim">
@@ -726,7 +726,7 @@ function Packages() {
 function Trust() {
   const { t } = useLang()
   return (
-    <Section id="sigurnost" className="border-t border-border">
+    <Section id="sigurnost" className="border-t border-border/50">
       <div className="text-center mb-14">
         <SectionLabel>{t.trust.label}</SectionLabel>
         <SectionTitle className="max-w-3xl mx-auto">{t.trust.title}</SectionTitle>
@@ -734,8 +734,8 @@ function Trust() {
       </div>
       <div className="grid md:grid-cols-3 gap-6 mb-8">
         {t.trust.compliance.map((c, i) => (
-          <div key={i} className="p-6 rounded-xl border border-border bg-bg-card">
-            <div className="w-10 h-10 rounded-lg bg-accent-muted flex items-center justify-center text-accent mb-4">
+          <div key={i} className="p-6 rounded-2xl border border-border bg-bg-card/80 backdrop-blur-sm hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
+            <div className="w-11 h-11 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent mb-4">
               <Icon.Shield className="w-5 h-5" />
             </div>
             <h3 className="font-semibold text-text mb-2">{c.title}</h3>
@@ -745,8 +745,8 @@ function Trust() {
       </div>
       <div className="grid md:grid-cols-2 gap-6">
         {t.trust.reliability.map((r, i) => (
-          <div key={i} className="p-6 rounded-xl border border-border bg-bg-card flex items-start gap-4">
-            <div className="w-10 h-10 rounded-lg bg-accent-muted flex items-center justify-center text-accent flex-shrink-0">
+          <div key={i} className="p-6 rounded-2xl border border-border bg-bg-card/80 backdrop-blur-sm hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 flex items-start gap-4">
+            <div className="w-11 h-11 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent flex-shrink-0">
               <Icon.Check className="w-5 h-5" />
             </div>
             <div>
@@ -765,12 +765,12 @@ function FAQ() {
   const [openIdx, setOpenIdx] = useState(null)
 
   return (
-    <Section id="faq" className="border-t border-border">
+    <Section id="faq" className="border-t border-border/50">
       <div className="text-center mb-14">
         <SectionLabel>{t.faq.label}</SectionLabel>
         <SectionTitle className="max-w-3xl mx-auto">{t.faq.title}</SectionTitle>
       </div>
-      <div className="max-w-3xl mx-auto divide-y divide-border">
+      <div className="max-w-3xl mx-auto divide-y divide-border/50">
         {t.faq.items.map((f, i) => (
           <div key={i}>
             <button
@@ -796,10 +796,12 @@ function WhatsAppCTA() {
   const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lang === 'hr' ? 'Pozdrav, zanima me ReviewFlow za moj lokal.' : 'Hi, I\'m interested in ReviewFlow for my venue.')}`
 
   return (
-    <section className="px-5 md:px-8 py-16 md:py-20 border-t border-border">
-      <div className="mx-auto max-w-3xl p-8 md:p-12 rounded-2xl border border-border bg-bg-card/50 text-center">
+    <section className="px-5 md:px-8 py-16 md:py-20 border-t border-border/50">
+      <div className="mx-auto max-w-3xl p-8 md:p-12 rounded-2xl border border-border bg-bg-card/50 backdrop-blur-sm text-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-accent/[0.02] pointer-events-none" />
+        <div className="relative">
         <SectionLabel>{t.whatsapp.ctaLabel}</SectionLabel>
-        <h2 className="font-display text-2xl md:text-3xl lg:text-4xl leading-tight text-text mb-4">{t.whatsapp.ctaTitle}</h2>
+        <h2 className="font-display text-2xl md:text-3xl lg:text-4xl leading-tight text-text mb-4 font-bold">{t.whatsapp.ctaTitle}</h2>
         <p className="text-text-muted text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-8">{t.whatsapp.ctaText}</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
           <a
@@ -807,20 +809,21 @@ function WhatsAppCTA() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={t.whatsapp.ctaPrimary}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366] text-white font-semibold rounded-lg hover:bg-[#20bd5a] transition-colors text-base shadow-lg shadow-[#25D366]/20"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366] text-white font-semibold rounded-lg hover:bg-[#20bd5a] transition-all text-base shadow-lg shadow-[#25D366]/20 hover:shadow-[#25D366]/40 hover:scale-[1.02]"
           >
             <Icon.WhatsApp className="w-5 h-5" />
             {t.whatsapp.ctaPrimary}
           </a>
           <a
             href="#kontakt"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 border border-border text-text-muted font-medium rounded-lg hover:border-border-hover hover:text-text transition-colors text-base"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 border border-border text-text-muted font-medium rounded-lg hover:border-border-hover hover:text-text transition-all text-base hover:bg-bg-elevated/50"
           >
             {t.whatsapp.ctaSecondary}
             <Icon.ArrowRight className="w-4 h-4" />
           </a>
         </div>
         {t.whatsapp.ctaPersonal && <p className="text-xs text-text-dim">{t.whatsapp.ctaPersonal}</p>}
+        </div>
       </div>
     </section>
   )
@@ -868,7 +871,7 @@ function Contact() {
   }
 
   return (
-    <Section id="kontakt" className="border-t border-border">
+    <Section id="kontakt" className="border-t border-border/50">
       <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
         <div>
           <SectionLabel>{t.contact.label}</SectionLabel>
@@ -876,7 +879,7 @@ function Contact() {
           <p className="text-text-muted mt-4 text-lg leading-relaxed mb-8">{t.contact.subtitle}</p>
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-accent-muted flex items-center justify-center text-accent">
+              <div className="w-11 h-11 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
                 <Icon.Mail className="w-5 h-5" />
               </div>
               <div>
@@ -885,7 +888,7 @@ function Contact() {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-accent-muted flex items-center justify-center text-accent">
+              <div className="w-11 h-11 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
                 <Icon.Phone className="w-5 h-5" />
               </div>
               <div>
@@ -901,20 +904,20 @@ function Contact() {
         </div>
         <div>
           {submitted ? (
-            <div className="flex flex-col items-center justify-center h-full text-center p-8 rounded-2xl border border-accent/20 bg-accent-muted">
+            <div className="flex flex-col items-center justify-center h-full text-center p-8 rounded-2xl border border-accent/20 bg-accent/5 backdrop-blur-sm">
               <Icon.Check className="w-12 h-12 text-accent mb-4" />
               <p className="text-xl font-semibold text-text mb-2">{t.contact.successTitle}</p>
               <p className="text-sm text-text-muted">{t.contact.successText}</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="p-6 md:p-8 rounded-2xl border border-border bg-bg-card space-y-5">
+            <form onSubmit={handleSubmit} className="p-6 md:p-8 rounded-2xl border border-border bg-bg-card/80 backdrop-blur-sm space-y-5">
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
                   <label htmlFor="name" className="block text-xs text-text-dim mb-1.5 font-medium">{t.contact.formName}</label>
                   <input
                     id="name" type="text" required
                     value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 bg-bg-elevated border border-border rounded-lg text-sm text-text placeholder-text-dim focus:outline-none focus:border-accent transition-colors"
+                    className="w-full px-4 py-3 bg-bg-elevated border border-border rounded-xl text-sm text-text placeholder-text-dim focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all"
                     placeholder={t.contact.formNamePlaceholder}
                   />
                 </div>
@@ -923,7 +926,7 @@ function Contact() {
                   <input
                     id="businessName" type="text" required
                     value={formData.businessName} onChange={e => setFormData({ ...formData, businessName: e.target.value })}
-                    className="w-full px-4 py-3 bg-bg-elevated border border-border rounded-lg text-sm text-text placeholder-text-dim focus:outline-none focus:border-accent transition-colors"
+                    className="w-full px-4 py-3 bg-bg-elevated border border-border rounded-xl text-sm text-text placeholder-text-dim focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all"
                     placeholder={t.contact.formBusinessPlaceholder}
                   />
                 </div>
@@ -934,7 +937,7 @@ function Contact() {
                   <input
                     id="city" type="text" required
                     value={formData.city} onChange={e => setFormData({ ...formData, city: e.target.value })}
-                    className="w-full px-4 py-3 bg-bg-elevated border border-border rounded-lg text-sm text-text placeholder-text-dim focus:outline-none focus:border-accent transition-colors"
+                    className="w-full px-4 py-3 bg-bg-elevated border border-border rounded-xl text-sm text-text placeholder-text-dim focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all"
                     placeholder={t.contact.formCityPlaceholder}
                   />
                 </div>
@@ -943,7 +946,7 @@ function Contact() {
                   <input
                     id="phone" type="tel" required
                     value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-3 bg-bg-elevated border border-border rounded-lg text-sm text-text placeholder-text-dim focus:outline-none focus:border-accent transition-colors"
+                    className="w-full px-4 py-3 bg-bg-elevated border border-border rounded-xl text-sm text-text placeholder-text-dim focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all"
                     placeholder={t.contact.formPhonePlaceholder}
                   />
                 </div>
@@ -954,7 +957,7 @@ function Contact() {
                   <input
                     id="email" type="email" required
                     value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 bg-bg-elevated border border-border rounded-lg text-sm text-text placeholder-text-dim focus:outline-none focus:border-accent transition-colors"
+                    className="w-full px-4 py-3 bg-bg-elevated border border-border rounded-xl text-sm text-text placeholder-text-dim focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all"
                     placeholder={t.contact.formEmailPlaceholder}
                   />
                 </div>
@@ -963,7 +966,7 @@ function Contact() {
                   <select
                     id="type"
                     value={formData.type} onChange={e => setFormData({ ...formData, type: e.target.value })}
-                    className="w-full px-4 py-3 bg-bg-elevated border border-border rounded-lg text-sm text-text focus:outline-none focus:border-accent transition-colors appearance-none"
+                    className="w-full px-4 py-3 bg-bg-elevated border border-border rounded-xl text-sm text-text focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all appearance-none"
                   >
                     {t.contact.formTypeOptions.map((opt, i) => (
                       <option key={i} value={opt}>{opt}</option>
@@ -976,13 +979,13 @@ function Contact() {
                 <textarea
                   id="message" rows="3"
                   value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 bg-bg-elevated border border-border rounded-lg text-sm text-text placeholder-text-dim focus:outline-none focus:border-accent transition-colors resize-none"
+                  className="w-full px-4 py-3 bg-bg-elevated border border-border rounded-xl text-sm text-text placeholder-text-dim focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all resize-none"
                   placeholder={t.contact.formMessagePlaceholder}
                 />
               </div>
               <button
                 type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-accent text-bg font-semibold rounded-lg hover:bg-accent-hover transition-colors text-base cursor-pointer"
+                className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-accent text-bg font-semibold rounded-xl hover:brightness-110 transition-all text-base cursor-pointer shadow-lg shadow-accent/20 hover:shadow-accent/30"
               >
                 {submitting ? t.contact.formSubmitting : t.contact.formSubmit}
                 {!submitting && <Icon.ArrowRight className="w-4 h-4" />}
@@ -1000,7 +1003,7 @@ function Footer() {
   const { t } = useLang()
   const currentYear = new Date().getFullYear()
   return (
-    <footer className="border-t border-border px-5 md:px-8 py-12">
+    <footer className="border-t border-border/50 px-5 md:px-8 py-12">
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
@@ -1013,7 +1016,7 @@ function Footer() {
             ))}
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-8 pt-8 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-text-dim">© {currentYear} Review<span className="text-accent">Flow</span>. {t.footer.copyright}</p>
           <div className="flex items-center gap-4 text-xs text-text-dim">
             <a href="mailto:kirkkodre@gmail.com" className="hover:text-text transition-colors">kirkkodre@gmail.com</a>
