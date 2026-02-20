@@ -43,7 +43,7 @@ export const translations = {
         'Ne znate što točno treba popraviti jer su povratne informacije raspršene.',
         'Slabiji dani ostaju slabi jer nema sustava povratka gostiju.',
       ],
-      businessImpact: 'Jedna loša večer može ostaviti 1★ recenziju koja stoji godinama. Ljuti gosti pišu recenzije. Zadovoljni najčešće ne. Bez sustava — gubite s obje strane.',
+      businessImpact: 'Jedna loša večer može ostaviti 1★ recenziju koja stoji godinama. Frustrirani gosti pišu recenzije. Zadovoljni najčešće ne. Bez sustava — gubite s obje strane.',
     },
     solution: {
       label: 'Rješenje',

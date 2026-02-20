@@ -273,11 +273,11 @@ function Problem() {
   const { t } = useLang()
   return (
     <Section id="problem" className="border-t border-border">
-      <div className="max-w-3xl">
+      <div className="max-w-3xl mx-auto text-center">
         <SectionLabel>{t.problem.label}</SectionLabel>
         <SectionTitle>{t.problem.title}</SectionTitle>
         <p className="text-text-muted mt-4 mb-10 text-lg leading-relaxed">{t.problem.subtitle}</p>
-        <ul className="space-y-5">
+        <ul className="space-y-5 text-left">
           {t.problem.painPoints.map((p, i) => (
             <li key={i} className="flex items-start gap-4 text-text-muted">
               <span className="mt-1 flex-shrink-0 w-6 h-6 rounded-full border border-danger/30 bg-danger/10 flex items-center justify-center text-danger text-xs font-bold">{i + 1}</span>
