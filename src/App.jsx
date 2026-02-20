@@ -900,7 +900,15 @@ function Contact() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       })
-      if (!response.ok) throw new Error('Failed to send')
+      
+      const data = await response.json()
+      
+      if (!response.ok) {
+        console.error('API Error:', data)
+        throw new Error(data.error || 'Failed to send')
+      }
+      
+      console.log('Email sent successfully:', data)
     } catch (err) {
       console.error('Form submission error:', err)
       // silently continue - still show success to user
