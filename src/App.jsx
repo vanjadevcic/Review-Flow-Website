@@ -580,43 +580,6 @@ function Demo() {
   )
 }
 
-function ROICounter() {
-  const { t } = useLang()
-  const ref = useRef(null)
-  const triggered = useRef(false)
-  const [vals, setVals] = useState({ tables: 0, avg: 0, total: 0 })
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !triggered.current) {
-          triggered.current = true
-          const start = performance.now()
-          const animate = (now) => {
-            const p = Math.min((now - start) / 1800, 1)
-            setVals({
-              tables: Math.floor(p * 5),
-              avg: Math.floor(p * 18),
-              total: Math.floor(p * 360),
-            })
-            if (p < 1) requestAnimationFrame(animate)
-          }
-          requestAnimationFrame(animate)
-        }
-      },
-      { threshold: 0.5 }
-    )
-    if (ref.current) observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [])
-
-  return (
-    <p ref={ref} className="text-2xl md:text-3xl font-display text-text mb-3 font-bold">
-      {vals.tables}{t.results.roiPrefix}{vals.avg}{t.results.roiMiddle}<span className="text-accent">€{vals.total}{t.results.roiSuffix}</span>
-    </p>
-  )
-}
-
 function Results() {
   const { t } = useLang()
   return (
@@ -640,10 +603,27 @@ function Results() {
           </div>
         ))}
       </div>
-      <div className="max-w-2xl mx-auto p-6 md:p-8 rounded-2xl border border-accent/20 bg-accent/5 backdrop-blur-sm text-center shadow-lg shadow-accent/5">
-        <p className="text-sm text-accent font-semibold uppercase tracking-[0.15em] mb-3">{t.results.calcLabel}</p>
-        <ROICounter />
-        <p className="text-sm text-text-muted">{t.results.calcFooter}</p>
+      <div className="max-w-2xl mx-auto p-6 md:p-8 rounded-2xl border border-border bg-bg-card/80 backdrop-blur-sm">
+        <p className="text-sm text-accent font-semibold uppercase tracking-[0.15em] mb-5 text-center">{t.results.roiLabel}</p>
+        <h3 className="text-2xl md:text-3xl font-bold text-text mb-6 text-center">{t.results.roiTitle}</h3>
+        <div className="space-y-3 mb-6">
+          <div className="flex items-center justify-between p-3 rounded-lg bg-bg-elevated border border-border">
+            <span className="text-sm text-text-muted">{t.results.roiScenario}</span>
+          </div>
+          <div className="flex items-center justify-between p-3 rounded-lg bg-bg-elevated border border-border">
+            <span className="text-sm text-text-muted">{t.results.roiLine1}</span>
+          </div>
+          <div className="flex items-center justify-between p-3 rounded-lg bg-bg-elevated border border-border">
+            <span className="text-sm text-text-muted">{t.results.roiLine2}</span>
+          </div>
+          <div className="flex items-center justify-between p-3 rounded-lg bg-bg-elevated border border-border">
+            <span className="text-sm text-text-muted">{t.results.roiLine3}</span>
+          </div>
+          <div className="p-4 rounded-lg bg-accent/10 border border-accent/30 text-center">
+            <p className="text-2xl md:text-3xl font-bold text-accent">{t.results.roiResult}</p>
+          </div>
+        </div>
+        <p className="text-xs text-text-dim leading-relaxed">{t.results.roiFootnote}</p>
       </div>
     </Section>
   )
