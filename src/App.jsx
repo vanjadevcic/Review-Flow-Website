@@ -116,10 +116,10 @@ const Stars = ({ count = 5, size = 'w-4 h-4' }) => (
 )
 
 function BrandedText({ text }) {
-  if (!text || !text.includes('ReviewFlow')) return text
-  return text.split(/(ReviewFlow™?)/g).map((part, i) => {
-    if (part === 'ReviewFlow') return <Fragment key={i}>Review<span className="text-accent">Flow</span></Fragment>
-    if (part === 'ReviewFlow™') return <Fragment key={i}>Review<span className="text-accent">Flow</span>™</Fragment>
+  if (!text || !text.includes('RatingFlow')) return text
+  return text.split(/(RatingFlow™?)/g).map((part, i) => {
+    if (part === 'RatingFlow') return <Fragment key={i}>Review<span className="text-accent">Flow</span></Fragment>
+    if (part === 'RatingFlow™') return <Fragment key={i}>Review<span className="text-accent">Flow</span>™</Fragment>
     return <Fragment key={i}>{part}</Fragment>
   })
 }
@@ -223,7 +223,7 @@ function Navbar() {
 
 function Hero() {
   const { t, lang } = useLang()
-  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lang === 'hr' ? 'Pozdrav, zanima me ReviewFlow za moj lokal.' : 'Hi, I\'m interested in ReviewFlow for my venue.')}`
+  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lang === 'hr' ? 'Pozdrav, zanima me RatingFlow za moj biznis.' : 'Hi, I\'m interested in RatingFlow for my business.')}`
   return (
     <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 px-5 md:px-8 overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-accent/[0.04] rounded-full blur-[120px] pointer-events-none" />
@@ -501,7 +501,7 @@ function Demo() {
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-8 h-8 rounded-full bg-[#25D366] flex items-center justify-center text-white text-xs font-bold">R</div>
                 <div>
-                  <p className="text-xs font-semibold text-[#e9edef]">ReviewFlow</p>
+                  <p className="text-xs font-semibold text-[#e9edef]">RatingFlow</p>
                   <p className="text-[10px] text-[#8696a0]">{t.demo.whatsappTime}</p>
                 </div>
               </div>
@@ -537,7 +537,7 @@ function Demo() {
           </div>
           <div className="p-6 space-y-4">
             <div className="flex items-center justify-between mb-2">
-              <p className="text-sm font-semibold text-text">Konoba Mareta</p>
+              <p className="text-sm font-semibold text-text">{t.demo.whatsappLocation.replace('Lokacija: ', '').replace('Location: ', '')}</p>
               <p className="text-xs text-text-dim">{t.demo.reportDate}</p>
             </div>
             <div className="grid grid-cols-3 gap-3">
@@ -653,6 +653,27 @@ function Results() {
           <p className="text-sm text-text-muted font-medium">{t.results.roiCompare}</p>
           <p className="text-xs text-text-dim leading-relaxed max-w-xl mx-auto">{t.results.roiFootnote}</p>
         </div>
+      </div>
+    </Section>
+  )
+}
+
+function Industries() {
+  const { t } = useLang()
+  return (
+    <Section id="industrije" className="border-t border-border/50">
+      <div className="text-center mb-14">
+        <SectionLabel>{t.industries.label}</SectionLabel>
+        <SectionTitle className="max-w-3xl mx-auto"><BrandedText text={t.industries.title} /></SectionTitle>
+        <p className="text-text-muted mt-4 text-lg">{t.industries.subtitle}</p>
+      </div>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {t.industries.items.map((item, i) => (
+          <div key={i} className="p-5 rounded-2xl border border-border bg-bg-card/80 backdrop-blur-sm hover:border-border-hover hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
+            <p className="text-sm font-semibold text-text mb-1">{item.title}</p>
+            <p className="text-xs text-text-muted leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
       </div>
     </Section>
   )
@@ -802,7 +823,7 @@ function FAQ() {
 
 function WhatsAppCTA() {
   const { t, lang } = useLang()
-  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lang === 'hr' ? 'Pozdrav, zanima me ReviewFlow za moj lokal.' : 'Hi, I\'m interested in ReviewFlow for my venue.')}`
+  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lang === 'hr' ? 'Pozdrav, zanima me RatingFlow za moj biznis.' : 'Hi, I\'m interested in RatingFlow for my business.')}`
 
   return (
     <section className="px-5 md:px-8 py-16 md:py-20 border-t border-border/50">
@@ -840,7 +861,7 @@ function WhatsAppCTA() {
 
 function FloatingWhatsApp() {
   const { t, lang } = useLang()
-  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lang === 'hr' ? 'Pozdrav, zanima me ReviewFlow za moj lokal.' : 'Hi, I\'m interested in ReviewFlow for my venue.')}`
+  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lang === 'hr' ? 'Pozdrav, zanima me RatingFlow za moj biznis.' : 'Hi, I\'m interested in RatingFlow for my business.')}`
 
   return (
     <a
@@ -1095,6 +1116,7 @@ export default function App() {
           <HowItWorks />
           <Demo />
           <Results />
+          <Industries />
           <Packages />
           <Trust />
           <FAQ />
