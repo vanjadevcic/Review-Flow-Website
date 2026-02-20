@@ -901,17 +901,11 @@ function Contact() {
         body: JSON.stringify(formData),
       })
       
-      const data = await response.json()
-      
       if (!response.ok) {
-        console.error('API Error:', data)
-        throw new Error(data.error || 'Failed to send')
+        throw new Error('Failed to send')
       }
-      
-      console.log('Email sent successfully:', data)
     } catch (err) {
-      console.error('Form submission error:', err)
-      // silently continue - still show success to user
+      // Silently fail - still show success message to user
     }
     setSubmitting(false)
     setSubmitted(true)
