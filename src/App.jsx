@@ -1,14 +1,9 @@
-import { useState, useEffect, useRef, createContext, useContext, Fragment } from 'react'
+import { useState, useEffect, useRef, Fragment } from 'react'
 import { translations } from './translations'
 import PrivacyModal from './PrivacyPolicy'
+import { LangContext, useLang } from './LangContext'
 
 const WHATSAPP_NUMBER = '385915959108'
-
-export const LangContext = createContext()
-
-function useLang() {
-  return useContext(LangContext)
-}
 
 const Icon = {
   Star: ({ className = 'w-5 h-5' }) => (
