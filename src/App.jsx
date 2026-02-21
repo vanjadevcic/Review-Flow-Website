@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef, createContext, useContext, Fragment } from 'react'
 import { translations } from './translations'
+import PrivacyModal from './PrivacyPolicy'
 
 const WHATSAPP_NUMBER = '385915959108'
 
-const LangContext = createContext()
+export const LangContext = createContext()
 
 function useLang() {
   return useContext(LangContext)
@@ -1081,6 +1082,8 @@ function Footer() {
             <a href="mailto:vanja.devcic@gmail.com" className="hover:text-text transition-colors">vanja.devcic@gmail.com</a>
             <span className="text-border">•</span>
             <a href="tel:+385915959108" className="hover:text-text transition-colors">+385 91 595 9108</a>
+            <span className="text-border">•</span>
+            <PrivacyModal />
           </div>
         </div>
       </div>
