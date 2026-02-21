@@ -115,6 +115,13 @@ const Stars = ({ count = 5, size = 'w-4 h-4' }) => (
   </span>
 )
 
+function YellowStar({ text }) {
+  if (!text) return null
+  return text.split('★').map((part, i, arr) => (
+    <Fragment key={i}>{part}{i < arr.length - 1 && <span className="text-accent">★</span>}</Fragment>
+  ))
+}
+
 function BrandedText({ text }) {
   if (!text || !text.includes('RatingFlow')) return text
   return text.split(/(RatingFlow™?)/g).map((part, i) => {
@@ -184,8 +191,8 @@ function Navbar() {
   const [open, setOpen] = useState(false)
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-bg/80 backdrop-blur-xl border-b border-border">
-      <div className="mx-auto max-w-6xl flex items-center justify-between px-5 md:px-8 h-16">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-bg/80 backdrop-blur-xl border-b border-border px-5 md:px-8">
+      <div className="mx-auto max-w-6xl flex items-center justify-between h-16">
         <a href="#" className="font-display text-2xl text-text tracking-tight font-extrabold">Rating<span className="text-accent">Flow</span></a>
         <div className="hidden lg:flex items-center gap-6">
           {t.nav.links.map(l => (
@@ -207,7 +214,7 @@ function Navbar() {
       </div>
       {open && (
         <div className="lg:hidden border-t border-border bg-bg/95 backdrop-blur-xl">
-          <div className="px-5 py-6 flex flex-col gap-4">
+          <div className="py-6 flex flex-col gap-4">
             {t.nav.links.map(l => (
               <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-text-muted hover:text-text transition-colors py-1">{l.label}</a>
             ))}
@@ -831,7 +838,7 @@ function WhatsAppCTA() {
         <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-accent/[0.02] pointer-events-none" />
         <div className="relative">
         <SectionLabel>{t.whatsapp.ctaLabel}</SectionLabel>
-        <h2 className="font-display text-2xl md:text-3xl lg:text-4xl leading-tight text-text mb-4 font-bold">{t.whatsapp.ctaTitle}</h2>
+        <h2 className="font-display text-2xl md:text-3xl lg:text-4xl leading-tight text-text mb-4 font-bold"><YellowStar text={t.whatsapp.ctaTitle} /></h2>
         <p className="text-text-muted text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-8">{t.whatsapp.ctaText}</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
           <a
@@ -916,7 +923,7 @@ function Contact() {
       <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
         <div>
           <SectionLabel>{t.contact.label}</SectionLabel>
-          <SectionTitle>{t.contact.title}</SectionTitle>
+          <SectionTitle><YellowStar text={t.contact.title} /></SectionTitle>
           <p className="text-text-muted mt-4 text-lg leading-relaxed mb-8">{t.contact.subtitle}</p>
           <div className="space-y-4">
             <div className="flex items-center gap-3">
