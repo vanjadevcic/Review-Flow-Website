@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
+import { createPortal } from 'react-dom'
 import { LangContext } from './LangContext'
 
 const pp = {
@@ -178,38 +179,32 @@ export default function PrivacyModal() {
         {t.link}
       </button>
 
-      {open && (
+      {open && createPortal(
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
           role="dialog"
           aria-modal="true"
           aria-label="Politika privatnosti"
         >
-          {/* Overlay */}
           <div
             className="absolute inset-0 bg-black/70 backdrop-blur-sm"
             onClick={() => setOpen(false)}
           />
-
-          {/* Modal */}
           <div className="relative w-full max-w-2xl max-h-[85vh] rounded-2xl border border-border bg-bg-card shadow-2xl flex flex-col overflow-hidden">
-            {/* Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-bg-elevated/50 flex-shrink-0">
               <h2 className="font-display text-lg font-bold text-text">{t.title}</h2>
               <button
                 onClick={() => setOpen(false)}
-                className="w-8 h-8 flex items-center justify-center rounded-lg text-text-muted hover:text-text hover:bg-bg-elevated transition-colors cursor-pointer"
+                className="text-text-dim hover:text-text transition-colors p-1 cursor-pointer"
                 aria-label={t.close}
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
                 </svg>
               </button>
             </div>
-
-            {/* Scrollable content */}
-            <div className="overflow-y-auto px-6 py-6 privacy-scroll">
-              <div className="privacy-content space-y-6 text-sm text-text-muted leading-relaxed">
+            <div className="privacy-scroll overflow-y-auto px-6 py-5 text-sm text-text-muted leading-relaxed space-y-6">
 
                 {/* 1. Introduction */}
                 <section>{t.intro}</section>
@@ -339,8 +334,8 @@ export default function PrivacyModal() {
 
               </div>
             </div>
-          </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   )

@@ -886,6 +886,7 @@ function Contact() {
   })
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -897,6 +898,7 @@ function Contact() {
     }
     
     setSubmitting(true)
+    setSubmitError('')
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -907,11 +909,11 @@ function Contact() {
       if (!response.ok) {
         throw new Error('Failed to send')
       }
+      setSubmitted(true)
     } catch (err) {
-      // Silently fail - still show success message to user
+      setSubmitError(t?.contact?.formError || 'Došlo je do greške pri slanju. Pokušajte ponovno.')
     }
     setSubmitting(false)
-    setSubmitted(true)
   }
 
   return (
@@ -1045,6 +1047,7 @@ function Contact() {
                 {submitting ? t.contact.formSubmitting : t.contact.formSubmit}
                 {!submitting && <Icon.ArrowRight className="w-4 h-4" />}
               </button>
+              {submitError && <p className="text-xs text-danger text-center">{submitError}</p>}
               <p className="text-xs text-text-dim text-center">{t.contact.formFooter}</p>
             </form>
           )}

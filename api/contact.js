@@ -59,13 +59,23 @@ export default async function handler(req, res) {
 
     // Send to Make.com webhook
     try {
-      await fetch('https://hook.eu1.make.com/a4xb3r8wbq2ut98pe59iy525i7n4lgxb', {
+      const makeResponse = await fetch('https://hook.eu1.make.com/a4xb3r8wbq2ut98pe59iy525i7n4lgxb', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, businessName, city, phone, email, type, message }),
       });
+
+      if (!makeResponse.ok) {
+        const makeBody = await makeResponse.text().catch(() => '');
+        console.error('Make.com webhook rejected request:', makeResponse.status, makeBody);
+        return res.status(502).json({
+          error: 'Make webhook rejected request',
+          makeStatus: makeResponse.status,
+        });
+      }
     } catch (err) {
       console.error('Make.com webhook error:', err);
+      return res.status(502).json({ error: 'Make webhook request failed' });
     }
 
     return res.status(200).json({ success: true });
