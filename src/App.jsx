@@ -292,7 +292,7 @@ function Problem() {
         <ul className="space-y-4 text-left">
           {t.problem.painPoints.map((p, i) => (
             <li key={i} className="flex items-start gap-4 text-text-muted">
-              <span className="mt-1 flex-shrink-0 w-7 h-7 rounded-full border border-danger/30 bg-danger/10 flex items-center justify-center text-danger text-xs font-bold">{i + 1}</span>
+              <span className="flex-shrink-0 w-7 h-7 rounded-full border border-danger/30 bg-danger/10 flex items-center justify-center text-danger text-xs font-bold">{i + 1}</span>
               <span className="text-base leading-relaxed">{p}</span>
             </li>
           ))}
