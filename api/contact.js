@@ -29,6 +29,7 @@ export default async function handler(req, res) {
   }
 
   try {
+    // Send email via Resend
     const { data, error } = await resend.emails.send({
       from: 'RatingFlow <onboarding@resend.dev>',
       to: 'vanja.devcic@gmail.com',
@@ -55,6 +56,13 @@ export default async function handler(req, res) {
       console.error('Resend API error:', error);
       return res.status(400).json({ error: error.message });
     }
+
+    // Send to Make.com webhook (don't await - fire and forget)
+    fetch('https://hook.eu1.make.com/a4xb3r8wbq2ut98pe59iy525i7n4lgxb', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, businessName, city, phone, email, type, message }),
+    }).catch(err => console.error('Make.com webhook error:', err));
 
     return res.status(200).json({ success: true });
   } catch (error) {
