@@ -4,6 +4,7 @@ import StarRating from './StarRating'
 import PrivacyModal from '../PrivacyPolicy'
 
 const STATES = { IDLE: 'idle', SUBMITTING: 'submitting', SUCCESS: 'success', ERROR: 'error' }
+const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/ufl5moof8kmuy65xbxca071mt6wgclal"
 
 export default function RatingForm({ config, clientId, locationId, LangSwitcher }) {
   const { t } = useLang()
@@ -12,9 +13,11 @@ export default function RatingForm({ config, clientId, locationId, LangSwitcher 
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
+  const [submitError, setSubmitError] = useState('')
   const [status, setStatus] = useState(STATES.IDLE)
   const isNegative = rating >= 1 && rating <= 3
   const hasContactInfo = phone.trim() || email.trim() || name.trim()
+  const isEmailValid = email.trim() === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
   const [showPrivacyNote, setShowPrivacyNote] = useState(false)
   const [isPrivacyLeaving, setIsPrivacyLeaving] = useState(false)
 
@@ -38,6 +41,7 @@ export default function RatingForm({ config, clientId, locationId, LangSwitcher 
   const canSubmit =
     isNegative &&
     message.trim().length > 0 &&
+    isEmailValid &&
     status !== STATES.SUBMITTING
 
   async function handleSubmit(e) {
@@ -45,11 +49,13 @@ export default function RatingForm({ config, clientId, locationId, LangSwitcher 
     if (!canSubmit) return
 
     setStatus(STATES.SUBMITTING)
+    setSubmitError('')
     try {
-      const res = await fetch('/api/submit', {
+      const res = await fetch(MAKE_WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          submission_id: crypto.randomUUID(),
           client_id: clientId,
           location_id: locationId,
           rating,
@@ -57,13 +63,15 @@ export default function RatingForm({ config, clientId, locationId, LangSwitcher 
           name: name.trim(),
           phone: phone.trim(),
           email: email.trim(),
-          consent: false,
+          created_at: new Date().toISOString(),
+          source: 'qr_web',
         }),
       })
 
       if (!res.ok) throw new Error('Submit failed')
       setStatus(STATES.SUCCESS)
     } catch {
+      setSubmitError(t.errorText)
       setStatus(STATES.ERROR)
     }
   }
@@ -98,7 +106,7 @@ export default function RatingForm({ config, clientId, locationId, LangSwitcher 
           />
         )}
         <h1 className="font-display text-xl font-bold text-text">
-          {config.business_name}
+          {config.custom_title || config.business_name}
         </h1>
         {LangSwitcher && (
           <div className="mt-5 flex justify-center">
@@ -188,6 +196,9 @@ export default function RatingForm({ config, clientId, locationId, LangSwitcher 
                 className="w-full px-4 py-3 bg-bg-elevated border border-border rounded-xl text-sm text-text placeholder-text-dim focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all"
                 placeholder={t.emailPlaceholder}
               />
+              {!!email.trim() && !isEmailValid && (
+                <p className="mt-1 text-xs text-danger">{t.emailInvalid}</p>
+              )}
             </div>
           </div>
 
@@ -202,7 +213,7 @@ export default function RatingForm({ config, clientId, locationId, LangSwitcher 
 
           {status === STATES.ERROR && (
             <p className="text-danger text-sm text-center">
-              {t.errorText}
+              {submitError || t.errorText}
             </p>
           )}
 

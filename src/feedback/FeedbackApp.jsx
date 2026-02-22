@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { LangContext, useLang } from '../LangContext'
 import { feedbackTranslations } from './translations'
 import { getQueryParams } from './utils'
 import RatingForm from './RatingForm'
 
-const STATES = { LOADING: 'loading', READY: 'ready', ERROR: 'error' }
+const STATES = { LOADING: 'loading', READY: 'ready', INVALID_LINK: 'invalid_link', NOT_FOUND: 'not_found' }
 
 function LangSwitcher() {
   const { lang, setLang } = useLang()
@@ -17,7 +17,24 @@ function LangSwitcher() {
   )
 }
 
-function FeedbackContent() {
+function applyTheme(config) {
+  if (!config) return
+  const root = document.documentElement.style
+  if (config.primary_color) root.setProperty('--color-accent', config.primary_color)
+  if (config.secondary_color) root.setProperty('--color-accent-hover', config.secondary_color)
+  if (config.background_color) root.setProperty('--color-bg', config.background_color)
+  if (config.text_color) root.setProperty('--color-text', config.text_color)
+}
+
+function resetTheme() {
+  const root = document.documentElement.style
+  root.removeProperty('--color-accent')
+  root.removeProperty('--color-accent-hover')
+  root.removeProperty('--color-bg')
+  root.removeProperty('--color-text')
+}
+
+function FeedbackContent({ onConfigLoaded }) {
   const { t } = useLang()
   const { clientId, locationId } = getQueryParams()
   const [config, setConfig] = useState(null)
@@ -25,9 +42,11 @@ function FeedbackContent() {
 
   useEffect(() => {
     if (!clientId) {
-      setStatus(STATES.ERROR)
+      setStatus(STATES.INVALID_LINK)
       return
     }
+
+    let cancelled = false
 
     fetch(`/api/client?client_id=${encodeURIComponent(clientId)}`)
       .then((res) => {
@@ -35,11 +54,25 @@ function FeedbackContent() {
         return res.json()
       })
       .then((data) => {
+        if (cancelled) return
+        if (!data || !data.business_name) {
+          setStatus(STATES.NOT_FOUND)
+          return
+        }
         setConfig(data)
+        applyTheme(data)
+        onConfigLoaded(data)
         setStatus(STATES.READY)
       })
-      .catch(() => setStatus(STATES.ERROR))
-  }, [clientId])
+      .catch(() => {
+        if (!cancelled) setStatus(STATES.NOT_FOUND)
+      })
+
+    return () => {
+      cancelled = true
+      resetTheme()
+    }
+  }, [clientId, locationId, onConfigLoaded])
 
   return (
     <div className="min-h-dvh bg-bg flex items-center justify-center px-5 py-10">
@@ -54,11 +87,15 @@ function FeedbackContent() {
           </div>
         )}
 
-        {status === STATES.ERROR && (
+        {status === STATES.INVALID_LINK && (
           <div className="text-center py-20">
-            <p className="text-text-muted text-sm">
-              {t.loadError}
-            </p>
+            <p className="text-text-muted text-sm">{t.invalidLink}</p>
+          </div>
+        )}
+
+        {status === STATES.NOT_FOUND && (
+          <div className="text-center py-20">
+            <p className="text-text-muted text-sm">{t.clientNotFound}</p>
           </div>
         )}
 
@@ -81,6 +118,12 @@ export default function FeedbackApp() {
 
   const t = feedbackTranslations[lang]
 
+  const handleConfigLoaded = useCallback((data) => {
+    if (data.language && feedbackTranslations[data.language]) {
+      setLang(data.language)
+    }
+  }, [])
+
   useEffect(() => {
     document.documentElement.lang = lang
     try { localStorage.setItem('rf-lang', lang) } catch {}
@@ -88,7 +131,7 @@ export default function FeedbackApp() {
 
   return (
     <LangContext.Provider value={{ t, lang, setLang }}>
-      <FeedbackContent />
+      <FeedbackContent onConfigLoaded={handleConfigLoaded} />
     </LangContext.Provider>
   )
 }

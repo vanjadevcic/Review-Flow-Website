@@ -14,7 +14,7 @@ export default async function handler(req, res) {
 
   const { client_id, location_id, rating, message, name, phone, email, consent } = req.body
 
-  if (!client_id || !location_id || !rating || !message) {
+  if (!client_id || !rating || !message) {
     return res.status(400).json({ error: 'Missing required fields' })
   }
 
