@@ -2,6 +2,8 @@ export const feedbackTranslations = {
   hr: {
     rateTitle: 'Kako biste ocijenili svoje iskustvo?',
     positiveText: 'Drago nam je! Želite li podijeliti iskustvo?',
+    positiveRedirectText: 'Hvala! Preusmjeravamo vas na Google kako biste podijelili iskustvo.',
+    positiveOpenGoogle: 'Otvori Google odmah',
     googleReviewBtn: 'Ostavi Google recenziju',
     messageLabel: 'Molimo vas da ukratko opišete što nije bilo u redu.',
     messagePlaceholder: 'Opišite svoje iskustvo...',
@@ -26,6 +28,8 @@ export const feedbackTranslations = {
   en: {
     rateTitle: 'How would you rate your experience?',
     positiveText: "We're glad! Would you like to share your experience?",
+    positiveRedirectText: 'Thank you! Redirecting you to Google to share your experience.',
+    positiveOpenGoogle: 'Open Google now',
     googleReviewBtn: 'Leave a Google review',
     messageLabel: 'Please briefly describe what went wrong.',
     messagePlaceholder: 'Describe your experience...',
