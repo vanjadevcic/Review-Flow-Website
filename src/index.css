@@ -1,6 +1,33 @@
 @import "tailwindcss";
 
+/* Override Tailwind v4 default: hover: was wrapped in @media (hover: hover)
+   which breaks on desktops that misreport pointer capability.
+   This restores the classic :hover behaviour. */
+@custom-variant hover (&:hover);
+
 @theme {
+  /* Light theme (default) */
+  --color-bg: #f5f5f7;
+  --color-bg-card: #ffffff;
+  --color-bg-elevated: #f0f0f2;
+  --color-border: #d4d4d8;
+  --color-border-hover: #a1a1aa;
+  --color-text: #18181b;
+  --color-text-muted: #52525b;
+  --color-text-dim: #6e6e76;
+  --color-accent: #b45309;
+  --color-accent-hover: #92400e;
+  --color-accent-muted: rgba(180, 83, 9, 0.08);
+  --color-success: #15803d;
+  --color-warning: #b45309;
+  --color-danger: #b91c1c;
+
+  --font-display: "Manrope", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+/* Dark theme — activated by adding class="dark" on <html> */
+.dark {
   --color-bg: #09090b;
   --color-bg-card: #121214;
   --color-bg-elevated: #1c1c1f;
@@ -8,16 +35,13 @@
   --color-border-hover: #3d3d47;
   --color-text: #ececee;
   --color-text-muted: #8f8f99;
-  --color-text-dim: #62626d;
+  --color-text-dim: #7e7e87;
   --color-accent: #fbbf24;
   --color-accent-hover: #fcd34d;
   --color-accent-muted: rgba(251, 191, 36, 0.12);
   --color-success: #22c55e;
   --color-warning: #fbbf24;
   --color-danger: #dc2626;
-
-  --font-display: "Manrope", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
 }
 
 html {

@@ -173,6 +173,7 @@ export default function PrivacyModal() {
   return (
     <>
       <button
+        type="button"
         onClick={() => setOpen(true)}
         className="text-text-dim hover:text-text transition-colors text-xs cursor-pointer underline underline-offset-2"
       >
@@ -194,6 +195,7 @@ export default function PrivacyModal() {
             <div className="flex items-center justify-between px-6 py-4 border-b border-border bg-bg-elevated/50 flex-shrink-0">
               <h2 className="font-display text-lg font-bold text-text">{t.title}</h2>
               <button
+                type="button"
                 onClick={() => setOpen(false)}
                 className="text-text-dim hover:text-text transition-colors p-1 cursor-pointer"
                 aria-label={t.close}

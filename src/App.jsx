@@ -138,7 +138,7 @@ const SectionLabel = ({ children }) => (
 )
 
 const SectionTitle = ({ children, className = '' }) => (
-  <h2 className={`font-display text-3xl md:text-4xl lg:text-5xl leading-tight text-text font-bold ${className}`}>{children}</h2>
+  <h2 className={`font-display text-3xl md:text-4xl lg:text-5xl leading-tight text-text font-extrabold ${className}`}>{children}</h2>
 )
 
 function StickyMobileCTA() {
